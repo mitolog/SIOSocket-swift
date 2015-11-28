@@ -14,6 +14,12 @@
 		46E6608A1C071A3400E48D0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E660881C071A3400E48D0F /* LaunchScreen.storyboard */; };
 		46E660951C071A3400E48D0F /* SIOSocket_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660941C071A3400E48D0F /* SIOSocket_SwiftTests.swift */; };
 		46E660A01C071A3400E48D0F /* SIOSocket_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E6609F1C071A3400E48D0F /* SIOSocket_SwiftUITests.swift */; };
+		46E660AE1C071B9300E48D0F /* SlackTextViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */; };
+		46E660AF1C071B9300E48D0F /* SlackTextViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46E660B31C071C8600E48D0F /* SIOSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660B21C071C8600E48D0F /* SIOSocket.swift */; };
+		46E660B51C071CEF00E48D0F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */; };
+		46E660B81C08468700E48D0F /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660B71C08468700E48D0F /* Consts.swift */; };
+		46E660C01C09815E00E48D0F /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E660BF1C09815E00E48D0F /* Cell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +39,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		46E660B01C071B9300E48D0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46E660AF1C071B9300E48D0F /* SlackTextViewController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		46E6607C1C071A3400E48D0F /* SIOSocket-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SIOSocket-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E6607F1C071A3400E48D0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +67,12 @@
 		46E6609B1C071A3400E48D0F /* SIOSocket-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SIOSocket-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E6609F1C071A3400E48D0F /* SIOSocket_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIOSocket_SwiftUITests.swift; sourceTree = "<group>"; };
 		46E660A11C071A3400E48D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlackTextViewController.framework; path = Carthage/Build/iOS/SlackTextViewController.framework; sourceTree = "<group>"; };
+		46E660B21C071C8600E48D0F /* SIOSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIOSocket.swift; sourceTree = "<group>"; };
+		46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		46E660B61C07474400E48D0F /* SIOSocket-Swift_Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SIOSocket-Swift_Bridging-Header.h"; sourceTree = "<group>"; };
+		46E660B71C08468700E48D0F /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		46E660BF1C09815E00E48D0F /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E660B51C071CEF00E48D0F /* JavaScriptCore.framework in Frameworks */,
+				46E660AE1C071B9300E48D0F /* SlackTextViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +105,8 @@
 		46E660731C071A3400E48D0F = {
 			isa = PBXGroup;
 			children = (
+				46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */,
+				46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */,
 				46E6607E1C071A3400E48D0F /* SIOSocket-Swift */,
 				46E660931C071A3400E48D0F /* SIOSocket-SwiftTests */,
 				46E6609E1C071A3400E48D0F /* SIOSocket-SwiftUITests */,
@@ -97,9 +127,12 @@
 		46E6607E1C071A3400E48D0F /* SIOSocket-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				46E660B61C07474400E48D0F /* SIOSocket-Swift_Bridging-Header.h */,
+				46E660B11C071C4C00E48D0F /* Sources */,
 				46E6607F1C071A3400E48D0F /* AppDelegate.swift */,
 				46E660811C071A3400E48D0F /* ViewController.swift */,
 				46E660831C071A3400E48D0F /* Main.storyboard */,
+				46E660BF1C09815E00E48D0F /* Cell.xib */,
 				46E660861C071A3400E48D0F /* Assets.xcassets */,
 				46E660881C071A3400E48D0F /* LaunchScreen.storyboard */,
 				46E6608B1C071A3400E48D0F /* Info.plist */,
@@ -125,6 +158,15 @@
 			path = "SIOSocket-SwiftUITests";
 			sourceTree = "<group>";
 		};
+		46E660B11C071C4C00E48D0F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				46E660B21C071C8600E48D0F /* SIOSocket.swift */,
+				46E660B71C08468700E48D0F /* Consts.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +177,7 @@
 				46E660781C071A3400E48D0F /* Sources */,
 				46E660791C071A3400E48D0F /* Frameworks */,
 				46E6607A1C071A3400E48D0F /* Resources */,
+				46E660B01C071B9300E48D0F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E6608A1C071A3400E48D0F /* LaunchScreen.storyboard in Resources */,
+				46E660C01C09815E00E48D0F /* Cell.xib in Resources */,
 				46E660871C071A3400E48D0F /* Assets.xcassets in Resources */,
 				46E660851C071A3400E48D0F /* Main.storyboard in Resources */,
 			);
@@ -257,7 +301,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E660821C071A3400E48D0F /* ViewController.swift in Sources */,
+				46E660B81C08468700E48D0F /* Consts.swift in Sources */,
 				46E660801C071A3400E48D0F /* AppDelegate.swift in Sources */,
+				46E660B31C071C8600E48D0F /* SIOSocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,10 +445,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SIOSocket-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.mitolab.SIOSocket-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SIOSocket-Swift/SIOSocket-Swift_Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -410,10 +462,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SIOSocket-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.mitolab.SIOSocket-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SIOSocket-Swift/SIOSocket-Swift_Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -484,6 +542,7 @@
 				46E660A61C071A3400E48D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46E660A71C071A3400E48D0F /* Build configuration list for PBXNativeTarget "SIOSocket-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +551,7 @@
 				46E660A91C071A3400E48D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46E660AA1C071A3400E48D0F /* Build configuration list for PBXNativeTarget "SIOSocket-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +560,7 @@
 				46E660AC1C071A3400E48D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
