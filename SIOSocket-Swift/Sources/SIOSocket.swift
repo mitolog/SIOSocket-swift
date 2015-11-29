@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import JavaScriptCore
 
+struct SIOSocketConsts {
+    
+    static let MSEC_PER_SEC = 1000
+    static let blob_factory_js = "function blob(dataString) {var blob = new Blob([dataString], {type: \'text/plain\'});return blob;}"
+}
+
 // Thanks to http://stackoverflow.com/questions/24123518/how-to-use-cc-md5-method-in-swift-language
 extension String  {
     var md5: String! {
@@ -31,7 +37,7 @@ extension String  {
     }
 }
 
-typealias responseCallback = (SIOSocket!) -> Void
+typealias responseCallback = (SIOSocket?) -> Void
 typealias OnConnect = () -> Void
 typealias OnDisconnect = () -> Void
 typealias OnError = ([String:AnyObject]) -> Void
@@ -51,7 +57,7 @@ class SIOSocket : NSObject {
     var onReconnectionAttempt:OnReconnectionAttempt!
     var onReconnectionError:OnReconnectionError!
     
-    class func socketWithHost(hostUrl:String, response:responseCallback ) {
+    class func socketWithHost(hostUrl:String, response:responseCallback )  -> SIOSocket? {
         return self.socketWithHost(
             hostUrl,
             reconnectAutomatically: true,
@@ -59,6 +65,7 @@ class SIOSocket : NSObject {
             withDelay: 1,
             maximumDelay: 5,
             timeout: 20,
+            withTransports: ["polling", "websocket"],
             response: response)
     }
     
@@ -69,20 +76,8 @@ class SIOSocket : NSObject {
         withDelay:NSTimeInterval,
         maximumDelay:NSTimeInterval,
         timeout:NSTimeInterval,
-        response: responseCallback) {
-            
-            return self.socketWithHost(hostUrl, reconnectAutomatically: reconnectAutomatically, attemptLimit: attemptLimit, withDelay: withDelay, maximumDelay: maximumDelay, timeout: timeout, withTransports: ["polling", "websocket"], response: response)
-    }
-    
-    class func socketWithHost(
-        hostUrl:String,
-        reconnectAutomatically:Bool,
-        attemptLimit:Int,
-        withDelay:NSTimeInterval,
-        maximumDelay:NSTimeInterval,
-        timeout:NSTimeInterval,
         withTransports:Array<String>,
-        response: responseCallback) {
+        response: responseCallback) -> SIOSocket? {
             
             let socket = SIOSocket()
             
@@ -91,122 +86,126 @@ class SIOSocket : NSObject {
                 socket.javascriptContext = ctx as! JSContext
             } else {
                 response(nil)
-                return
+                return nil
             }
             
             socket.javascriptContext.exceptionHandler = { context, errorValue in
                 print("JSError: \(errorValue)")
-                print("\(NSThread.callStackSymbols())")
+                //print("\(NSThread.callStackSymbols())")
             }
             
             let onLoad: @convention(block) () -> Void = { [weak socket] in
                 
-                if let socket = socket {
-                    socket.thread = NSThread.currentThread()
-                    
-                    // Load socketio.js
-                    socket.javascriptContext.evaluateScript(Consts.socket_io_js)
-                    // Load helper blob method
-                    socket.javascriptContext.evaluateScript(Consts.blob_factory_js)
-                    
-                    // Load socket.io constractor
-                    let socketConstructor = Consts.socket_io_js_constructor(hostUrl, reconnection: reconnectAutomatically, attemptLimit: attemptLimit, reconnectionDelay: withDelay, reconnectionDelayMax: maximumDelay, timeout: timeout, transports: withTransports)
-                    socket.javascriptContext.setObject(socket.javascriptContext.evaluateScript(socketConstructor), forKeyedSubscript: "swift_socket")
-                    if socket.javascriptContext.objectForKeyedSubscript("swift_socket").toObject() == nil {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            response(nil)
-                        })
-                    }
-                    
-                    /* Set swift callbacks when socket.io(js) callback called.
-                     * Corresponding with events in http://socket.io/docs/client-api/
-                     */
-                    
-                    let onConnectCallBack: @convention(block) () -> Void = { [weak socket] in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onConnect != nil {
-                                socket!.onConnect()
-                            }
-                        })
-                    }
-                    
-                    let onDisconnect: @convention(block) () -> Void = { [weak socket] in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onDisConnect != nil {
-                                socket!.onDisConnect()
-                            }
-                        })
-                    }
-                    
-                    let onError: @convention(block) ([String:AnyObject]) -> Void = { [weak socket] (errorInfo: [String:AnyObject]) in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onError != nil {
-                                socket!.onError(errorInfo)
-                            }
-                        })
-                    }
-                    
-                    let onReconnect: @convention(block) (Int) -> Void = { [weak socket] (numberOfAttempts:Int) in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onReconnect != nil {
-                                socket!.onReconnect(numberOfAttempts: numberOfAttempts)
-                            }
-                        })
-                    }
-                    
-                    let onReconnectionAttempt: @convention(block) (Int) -> Void = { [weak socket] (numberOfAttempts:Int) in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onReconnectionAttempt != nil {
-                                socket!.onReconnectionAttempt(numberOfAttempts: numberOfAttempts)
-                            }
-                        })
-                    }
-                    
-                    let onReconnectionError: @convention(block) ([String:AnyObject]) -> Void = { [weak socket] (errorInfo: [String:AnyObject]) in
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if socket == nil { response(nil); return }
-                            if socket!.onReconnectionError != nil {
-                                socket!.onReconnectionError(errorInfo)
-                            }
-                        })
-                    }
-                    
-                    socket.javascriptContext.setObject(unsafeBitCast(onConnectCallBack, AnyObject.self), forKeyedSubscript: "swift_onConnect")
-                    socket.javascriptContext.setObject(unsafeBitCast(onDisconnect, AnyObject.self), forKeyedSubscript: "swift_onDisconnect")
-                    socket.javascriptContext.setObject(unsafeBitCast(onError, AnyObject.self), forKeyedSubscript: "swift_onError")
-                    socket.javascriptContext.setObject(unsafeBitCast(onReconnect, AnyObject.self), forKeyedSubscript: "swift_onReconnect")
-                    socket.javascriptContext.setObject(unsafeBitCast(onReconnectionAttempt, AnyObject.self), forKeyedSubscript: "swift_onReconnectionAttempt")
-                    socket.javascriptContext.setObject(unsafeBitCast(onReconnectionError, AnyObject.self), forKeyedSubscript: "swift_onReconnectionError")
-                    
-                    socket.javascriptContext.evaluateScript("swift_socket.on('connect', swift_onConnect);")
-                    socket.javascriptContext.evaluateScript("swift_socket.on('error', swift_onError);")
-                    socket.javascriptContext.evaluateScript("swift_socket.on('disconnect', swift_onDisconnect);")
-                    socket.javascriptContext.evaluateScript("swift_socket.on('reconnect', swift_onReconnect);")
-                    socket.javascriptContext.evaluateScript("swift_socket.on('reconnecting', swift_onReconnectionAttempt);")
-                    socket.javascriptContext.evaluateScript("swift_socket.on('reconnect_error', swift_onReconnectionError);")
+                let context = JSContext.currentContext()
+                
+                socket!.thread = NSThread.currentThread()
+                
+                let path = NSBundle.mainBundle().pathForResource("socket.io-1.3.7",ofType:"js")
+                let socket_io_js = try! String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+                context.evaluateScript(socket_io_js)
+                context.evaluateScript(SIOSocketConsts.blob_factory_js)
 
+                let io = context.objectForKeyedSubscript("io")
+                let swiftSocket = io.callWithArguments([
+                        hostUrl, [
+                            "reconnection": reconnectAutomatically,
+                            "reconnectionAttempts": attemptLimit == -1 ? "Infinity" : attemptLimit.description,
+                            "reconnectionDelay": Int(withDelay) * SIOSocketConsts.MSEC_PER_SEC,
+                            "reconnectionDelayMax": Int(maximumDelay) * SIOSocketConsts.MSEC_PER_SEC,
+                            "timeout": Int(timeout) * SIOSocketConsts.MSEC_PER_SEC,
+                            "transports": withTransports
+                        ]
+                    ])
+                context.setObject(swiftSocket, forKeyedSubscript: "swift_socket")
+                if context.objectForKeyedSubscript("swift_socket").toObject() == nil {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        response(socket)
+                        print("swift_socket is not created")
+                        response(nil)
                     })
-//            let onLoadTest: @convention(block) () -> Void = { [weak socket] in
-//                print("hello: \(socket)")
-//            }
-                    
-            }
-            else {
-                print("couldn't catch socket in onLoad callback with some unkown reason.")
-                response(nil)
                 }
+                
+                /* Set swift callbacks when socket.io(js) callback called.
+                 * Corresponding with events in http://socket.io/docs/client-api/
+                 */
+                
+                let onConnectCallBack: @convention(block) () -> Void = { [weak socket] in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onConnect != nil {
+                            socket!.onConnect()
+                        }
+                    })
+                }
+                
+                let onDisconnect: @convention(block) () -> Void = { [weak socket] in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onDisConnect != nil {
+                            socket!.onDisConnect()
+                        }
+                    })
+                }
+                
+                let onError: @convention(block) ([String:AnyObject]) -> Void = { [weak socket] (errorInfo: [String:AnyObject]) in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onError != nil {
+                            socket!.onError(errorInfo)
+                        }
+                    })
+                }
+                
+                let onReconnect: @convention(block) (Int) -> Void = { [weak socket] (numberOfAttempts:Int) in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onReconnect != nil {
+                            socket!.onReconnect(numberOfAttempts: numberOfAttempts)
+                        }
+                    })
+                }
+                
+                let onReconnectionAttempt: @convention(block) (Int) -> Void = { [weak socket] (numberOfAttempts:Int) in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onReconnectionAttempt != nil {
+                            socket!.onReconnectionAttempt(numberOfAttempts: numberOfAttempts)
+                        }
+                    })
+                }
+                
+                let onReconnectionError: @convention(block) ([String:AnyObject]) -> Void = { [weak socket] (errorInfo: [String:AnyObject]) in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if socket == nil { response(nil); return }
+                        if socket!.onReconnectionError != nil {
+                            socket!.onReconnectionError(errorInfo)
+                        }
+                    })
+                }
+                
+                context.setObject(unsafeBitCast(onConnectCallBack, AnyObject.self), forKeyedSubscript: "swift_onConnect")
+                context.setObject(unsafeBitCast(onDisconnect, AnyObject.self), forKeyedSubscript: "swift_onDisconnect")
+                context.setObject(unsafeBitCast(onError, AnyObject.self), forKeyedSubscript: "swift_onError")
+                context.setObject(unsafeBitCast(onReconnect, AnyObject.self), forKeyedSubscript: "swift_onReconnect")
+                context.setObject(unsafeBitCast(onReconnectionAttempt, AnyObject.self), forKeyedSubscript: "swift_onReconnectionAttempt")
+                context.setObject(unsafeBitCast(onReconnectionError, AnyObject.self), forKeyedSubscript: "swift_onReconnectionError")
+                
+                context.evaluateScript("swift_socket.on('connect', swift_onConnect);")
+                context.evaluateScript("swift_socket.on('error', swift_onError);")
+                context.evaluateScript("swift_socket.on('disconnect', swift_onDisconnect);")
+                context.evaluateScript("swift_socket.on('reconnect', swift_onReconnect);")
+                context.evaluateScript("swift_socket.on('reconnecting', swift_onReconnectionAttempt);")
+                context.evaluateScript("swift_socket.on('reconnect_error', swift_onReconnectionError);")
+
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    response(socket)
+                })
             }
 
             socket.javascriptContext.setObject(unsafeBitCast(onLoad, AnyObject!.self), forKeyedSubscript: "swift_onloadCallback")
             socket.javascriptContext.evaluateScript("window.onload = swift_onloadCallback;")
             socket.javascriptWebView.loadHTMLString("<html/>", baseURL: nil)
+            
+            return socket
     }
     
     func on(event:String, callback:[AnyObject] -> Void) {
@@ -218,8 +217,11 @@ class SIOSocket : NSObject {
                     arguments.append(object)
                 }
             }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                callback(arguments)
+            })
         }
-        
+
         self.javascriptContext.setObject(unsafeBitCast(callbackFunc, AnyObject.self), forKeyedSubscript: "swift_\(eventId)")
         let script = "swift_socket.on('\(event)', swift_\(eventId));"
         self.performSelector("evaluateScript:", onThread: self.thread, withObject: script, waitUntilDone: false)

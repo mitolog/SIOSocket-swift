@@ -18,8 +18,8 @@
 		46E660AF1C071B9300E48D0F /* SlackTextViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46E660B31C071C8600E48D0F /* SIOSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660B21C071C8600E48D0F /* SIOSocket.swift */; };
 		46E660B51C071CEF00E48D0F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */; };
-		46E660B81C08468700E48D0F /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660B71C08468700E48D0F /* Consts.swift */; };
 		46E660C01C09815E00E48D0F /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E660BF1C09815E00E48D0F /* Cell.xib */; };
+		46E660C41C09F9CD00E48D0F /* socket.io-1.3.7.js in Resources */ = {isa = PBXBuildFile; fileRef = 46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +71,9 @@
 		46E660B21C071C8600E48D0F /* SIOSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIOSocket.swift; sourceTree = "<group>"; };
 		46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		46E660B61C07474400E48D0F /* SIOSocket-Swift_Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SIOSocket-Swift_Bridging-Header.h"; sourceTree = "<group>"; };
-		46E660B71C08468700E48D0F /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		46E660BF1C09815E00E48D0F /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
+		46E660C21C09BA9C00E48D0F /* SIOSocket.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SIOSocket.playground; sourceTree = "<group>"; };
+		46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "socket.io-1.3.7.js"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				46E660B21C071C8600E48D0F /* SIOSocket.swift */,
-				46E660B71C08468700E48D0F /* Consts.swift */,
+				46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */,
+				46E660C21C09BA9C00E48D0F /* SIOSocket.playground */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -274,6 +276,7 @@
 			files = (
 				46E6608A1C071A3400E48D0F /* LaunchScreen.storyboard in Resources */,
 				46E660C01C09815E00E48D0F /* Cell.xib in Resources */,
+				46E660C41C09F9CD00E48D0F /* socket.io-1.3.7.js in Resources */,
 				46E660871C071A3400E48D0F /* Assets.xcassets in Resources */,
 				46E660851C071A3400E48D0F /* Main.storyboard in Resources */,
 			);
@@ -301,7 +304,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E660821C071A3400E48D0F /* ViewController.swift in Sources */,
-				46E660B81C08468700E48D0F /* Consts.swift in Sources */,
 				46E660801C071A3400E48D0F /* AppDelegate.swift in Sources */,
 				46E660B31C071C8600E48D0F /* SIOSocket.swift in Sources */,
 			);

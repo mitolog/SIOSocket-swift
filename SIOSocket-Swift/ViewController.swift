@@ -13,29 +13,44 @@ class ViewController: SLKTextViewController {
 
     var chats = [String]()
     var socket:SIOSocket!
+
     let userName = "mitolog"
+    let hostName = "http://172.17.165.124:8080"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         self.inverted = false
         
         let nib = UINib(nibName: "Cell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
-        
-        /* SIOSocket code below */
 
         if self.socket != nil {
             self.socket.close()
         }
         
-        SIOSocket.socketWithHost("http://192.168.43.234:8080", response: { (_socket) -> Void in
-            self.socket = _socket
+        self.socket =
+        SIOSocket.socketWithHost(self.hostName, response: { [unowned self] (_socket) -> Void in
+            
+            if _socket != nil {
+                self.socket = _socket
+                print("socket preparation success")
+            } else {
+                print("socket preparation error")
+                return
+            }
             
             self.socket.onConnect = { [weak self] in
                 print("connected")
                 self!.socket.emit("connected", args: [self!.userName])
+            }
+            
+            self.socket.onError = { (errorInfo:[String:AnyObject]) in
+                print("onError: \(errorInfo)")
+            }
+            
+            self.socket.onReconnectionError = { (errorInfo:[String:AnyObject]) in
+                print("reconnectionError: \(errorInfo)")
             }
             
             self.socket.on("publish", callback: { (params:[AnyObject]) -> Void in
@@ -58,6 +73,7 @@ class ViewController: SLKTextViewController {
         if let chat = self.textView.text {
             self.chats.append(chat)
             self.tableView.reloadData()
+            self.socket.emit("publish", args: [chat])
         }
         super.didPressRightButton(sender)
     }
