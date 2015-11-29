@@ -73,7 +73,7 @@ class ViewController: SLKTextViewController {
         if let chat = self.textView.text {
             self.chats.append(chat)
             self.tableView.reloadData()
-            self.socket.emit("publish", args: [chat])
+            self.socket.emit("publish", args: ["\(self.userName): \(chat)"])
         }
         super.didPressRightButton(sender)
     }

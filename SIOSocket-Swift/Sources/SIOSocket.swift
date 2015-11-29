@@ -47,7 +47,6 @@ typealias OnReconnectionError = ([String:AnyObject]) -> Void
 
 class SIOSocket : NSObject {
     
-    var thread:NSThread!
     var javascriptWebView:UIWebView!
     var javascriptContext:JSContext!
     var onConnect:OnConnect!
@@ -94,11 +93,9 @@ class SIOSocket : NSObject {
                 //print("\(NSThread.callStackSymbols())")
             }
             
-            let onLoad: @convention(block) () -> Void = { [weak socket] in
+            let onLoad: @convention(block) () -> Void = {
                 
                 let context = JSContext.currentContext()
-                
-                socket!.thread = NSThread.currentThread()
                 
                 let path = NSBundle.mainBundle().pathForResource("socket.io-1.3.7",ofType:"js")
                 let socket_io_js = try! String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
@@ -223,8 +220,7 @@ class SIOSocket : NSObject {
         }
 
         self.javascriptContext.setObject(unsafeBitCast(callbackFunc, AnyObject.self), forKeyedSubscript: "swift_\(eventId)")
-        let script = "swift_socket.on('\(event)', swift_\(eventId));"
-        self.performSelector("evaluateScript:", onThread: self.thread, withObject: script, waitUntilDone: false)
+        self.evaluateScript("swift_socket.on('\(event)', swift_\(eventId));")
     }
     
     func emit(event:String) {
@@ -265,8 +261,7 @@ class SIOSocket : NSObject {
             }
         }
         
-        let script = "swift_socket.emit(\(arguments.joinWithSeparator(",")));"
-        self.performSelector("evaluateScript:", onThread: self.thread, withObject: script, waitUntilDone: false)
+        self.evaluateScript("swift_socket.emit(\(arguments.joinWithSeparator(",")));")
     }
     
     func evaluateScript(script:String) {
