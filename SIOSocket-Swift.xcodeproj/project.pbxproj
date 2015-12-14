@@ -20,6 +20,14 @@
 		46E660B51C071CEF00E48D0F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */; };
 		46E660C01C09815E00E48D0F /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E660BF1C09815E00E48D0F /* Cell.xib */; };
 		46E660C41C09F9CD00E48D0F /* socket.io-1.3.7.js in Resources */ = {isa = PBXBuildFile; fileRef = 46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */; };
+		46E6780B1C1E9CB2007A2C85 /* SIOSocketSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 46E6780A1C1E9CB2007A2C85 /* SIOSocketSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46E6780F1C1E9CB2007A2C85 /* SIOSocketSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E678081C1E9CB2007A2C85 /* SIOSocketSwift.framework */; };
+		46E678101C1E9CB2007A2C85 /* SIOSocketSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46E678081C1E9CB2007A2C85 /* SIOSocketSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46E678141C1E9F7F007A2C85 /* SIOSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E660B21C071C8600E48D0F /* SIOSocket.swift */; };
+		46E678161C1E9F90007A2C85 /* socket.io-1.3.7.js in Resources */ = {isa = PBXBuildFile; fileRef = 46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */; };
+		46E678171C1E9FFA007A2C85 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		46E678251C1EAB22007A2C85 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E678241C1EAB22007A2C85 /* CryptoSwift.framework */; };
+		46E678261C1EAB94007A2C85 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E678241C1EAB22007A2C85 /* CryptoSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +45,13 @@
 			remoteGlobalIDString = 46E6607B1C071A3400E48D0F;
 			remoteInfo = "SIOSocket-Swift";
 		};
+		46E6780D1C1E9CB2007A2C85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46E660741C071A3400E48D0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 46E678071C1E9CB2007A2C85;
+			remoteInfo = SIOSocketSwift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +62,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				46E660AF1C071B9300E48D0F /* SlackTextViewController.framework in Embed Frameworks */,
+				46E678101C1E9CB2007A2C85 /* SIOSocketSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +90,11 @@
 		46E660BF1C09815E00E48D0F /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		46E660C21C09BA9C00E48D0F /* SIOSocket.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SIOSocket.playground; sourceTree = "<group>"; };
 		46E660C31C09F9CD00E48D0F /* socket.io-1.3.7.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "socket.io-1.3.7.js"; sourceTree = "<group>"; };
+		46E678081C1E9CB2007A2C85 /* SIOSocketSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SIOSocketSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46E6780A1C1E9CB2007A2C85 /* SIOSocketSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIOSocketSwift.h; sourceTree = "<group>"; };
+		46E6780C1C1E9CB2007A2C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46E678231C1EA807007A2C85 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		46E678241C1EAB22007A2C85 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E678251C1EAB22007A2C85 /* CryptoSwift.framework in Frameworks */,
+				46E6780F1C1E9CB2007A2C85 /* SIOSocketSwift.framework in Frameworks */,
 				46E660B51C071CEF00E48D0F /* JavaScriptCore.framework in Frameworks */,
 				46E660AE1C071B9300E48D0F /* SlackTextViewController.framework in Frameworks */,
 			);
@@ -100,17 +123,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		46E678041C1E9CB2007A2C85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46E678261C1EAB94007A2C85 /* CryptoSwift.framework in Frameworks */,
+				46E678171C1E9FFA007A2C85 /* JavaScriptCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		46E660731C071A3400E48D0F = {
 			isa = PBXGroup;
 			children = (
+				46E678231C1EA807007A2C85 /* Cartfile */,
+				46E678241C1EAB22007A2C85 /* CryptoSwift.framework */,
 				46E660B41C071CEF00E48D0F /* JavaScriptCore.framework */,
 				46E660AD1C071B9300E48D0F /* SlackTextViewController.framework */,
 				46E6607E1C071A3400E48D0F /* SIOSocket-Swift */,
 				46E660931C071A3400E48D0F /* SIOSocket-SwiftTests */,
 				46E6609E1C071A3400E48D0F /* SIOSocket-SwiftUITests */,
+				46E678091C1E9CB2007A2C85 /* SIOSocketSwift */,
 				46E6607D1C071A3400E48D0F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,6 +156,7 @@
 				46E6607C1C071A3400E48D0F /* SIOSocket-Swift.app */,
 				46E660901C071A3400E48D0F /* SIOSocket-SwiftTests.xctest */,
 				46E6609B1C071A3400E48D0F /* SIOSocket-SwiftUITests.xctest */,
+				46E678081C1E9CB2007A2C85 /* SIOSocketSwift.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,7 +205,27 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		46E678091C1E9CB2007A2C85 /* SIOSocketSwift */ = {
+			isa = PBXGroup;
+			children = (
+				46E6780A1C1E9CB2007A2C85 /* SIOSocketSwift.h */,
+				46E6780C1C1E9CB2007A2C85 /* Info.plist */,
+			);
+			path = SIOSocketSwift;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		46E678051C1E9CB2007A2C85 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46E6780B1C1E9CB2007A2C85 /* SIOSocketSwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		46E6607B1C071A3400E48D0F /* SIOSocket-Swift */ = {
@@ -184,6 +240,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				46E6780E1C1E9CB2007A2C85 /* PBXTargetDependency */,
 			);
 			name = "SIOSocket-Swift";
 			productName = "SIOSocket-Swift";
@@ -226,6 +283,24 @@
 			productReference = 46E6609B1C071A3400E48D0F /* SIOSocket-SwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		46E678071C1E9CB2007A2C85 /* SIOSocketSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46E678131C1E9CB3007A2C85 /* Build configuration list for PBXNativeTarget "SIOSocketSwift" */;
+			buildPhases = (
+				46E678031C1E9CB2007A2C85 /* Sources */,
+				46E678041C1E9CB2007A2C85 /* Frameworks */,
+				46E678051C1E9CB2007A2C85 /* Headers */,
+				46E678061C1E9CB2007A2C85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SIOSocketSwift;
+			productName = SIOSocketSwift;
+			productReference = 46E678081C1E9CB2007A2C85 /* SIOSocketSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -247,6 +322,9 @@
 						CreatedOnToolsVersion = 7.1.1;
 						TestTargetID = 46E6607B1C071A3400E48D0F;
 					};
+					46E678071C1E9CB2007A2C85 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 				};
 			};
 			buildConfigurationList = 46E660771C071A3400E48D0F /* Build configuration list for PBXProject "SIOSocket-Swift" */;
@@ -265,6 +343,7 @@
 				46E6607B1C071A3400E48D0F /* SIOSocket-Swift */,
 				46E6608F1C071A3400E48D0F /* SIOSocket-SwiftTests */,
 				46E6609A1C071A3400E48D0F /* SIOSocket-SwiftUITests */,
+				46E678071C1E9CB2007A2C85 /* SIOSocketSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -293,6 +372,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E678061C1E9CB2007A2C85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46E678161C1E9F90007A2C85 /* socket.io-1.3.7.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +412,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		46E678031C1E9CB2007A2C85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46E678141C1E9F7F007A2C85 /* SIOSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -337,6 +432,11 @@
 			isa = PBXTargetDependency;
 			target = 46E6607B1C071A3400E48D0F /* SIOSocket-Swift */;
 			targetProxy = 46E6609C1C071A3400E48D0F /* PBXContainerItemProxy */;
+		};
+		46E6780E1C1E9CB2007A2C85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 46E678071C1E9CB2007A2C85 /* SIOSocketSwift */;
+			targetProxy = 46E6780D1C1E9CB2007A2C85 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -447,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -464,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -525,6 +627,62 @@
 			};
 			name = Release;
 		};
+		46E678111C1E9CB3007A2C85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SIOSocketSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitolab.SIOSocketSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		46E678121C1E9CB3007A2C85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SIOSocketSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitolab.SIOSocketSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -563,6 +721,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		46E678131C1E9CB3007A2C85 /* Build configuration list for PBXNativeTarget "SIOSocketSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46E678111C1E9CB3007A2C85 /* Debug */,
+				46E678121C1E9CB3007A2C85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
